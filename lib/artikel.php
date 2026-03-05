@@ -1,5 +1,4 @@
 <?php
-
 class artikel {
 
     private $connection;
@@ -16,8 +15,7 @@ class artikel {
         $artikel = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
         return($artikel);
-
     }
-
-
 }
+
+
