@@ -10,7 +10,6 @@ class ingredient
     public function __construct($conn)
     {
         $this->connection = $conn;
-
     }
 
     // write the SQL to get ingredients for that dish

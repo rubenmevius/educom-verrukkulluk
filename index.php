@@ -23,11 +23,11 @@ $data = $art->selecteerArtikel(1);
 $data2 = $use->selecteerUser(1);
 $data3 = $kit->selecteerKitchentype (1);
 $data4 = $ing->selecteerIngredient (1);
-$data5 = $gin->selecteerGerechtinfo (1);
+$data5 = $gin->selecteerGerechtinfo (4);
 $data6 = $ger->selecteerGerecht(1);
 
 /// RETURN
 //var_dump($data4);
 echo "<pre>";
-print_r($data4);
+print_r($data5);
 echo "</pre>";
