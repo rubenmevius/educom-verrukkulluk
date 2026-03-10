@@ -18,10 +18,10 @@ class gerechtinfo
         return $use;
     }
     // sql to fetch gerechtid
-    public function selecteerGerechtinfo($gerecht_id)
+    public function selecteerGerechtinfo($gerecht_id, $record_type)
     {
         $sql = "SELECT * FROM gerechtinfo 
-        WHERE gerecht_id = $gerecht_id";
+        WHERE gerecht_id = $gerecht_id AND record_type = '$record_type'";
 
         $result = mysqli_query($this->connection, $sql);
 
@@ -29,7 +29,7 @@ class gerechtinfo
 
         while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 
-            if (($row["record_type"] == "F" || $row["record_type"] == "O") && $row["user_id"] != NULL){
+            if ($record_type=="F" or $record_type=="O"){
                 $user = $this->selecteerUser($row["user_id"]);
                 $gerechtinfo_and_user[] = [
                     "id" => $row["id"],

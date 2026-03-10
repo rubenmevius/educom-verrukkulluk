@@ -17,9 +17,9 @@ class gerecht {
         }
 
         // Build main method selectRecipe
-    public function selectRecipe($gerecht_id) {
+    public function selecteerGerecht($id) {
 
-    $sql = "SELECT * FROM gerecht WHERE gerecht_id = $gerecht_id";
+    $sql = "SELECT * FROM gerecht WHERE gerecht_id = $id";
     $result = mysqli_query($this->connection, $sql);
 
     $recipe = mysqli_fetch_array($result, MYSQLI_ASSOC);
