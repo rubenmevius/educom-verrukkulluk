@@ -15,8 +15,8 @@ require_once("lib/gerecht.php");
 // $use = new user($db->getConnection());
 // $kit = new kitchentype($db->getConnection());
 // $ing = new ingredient($db->getConnection());
- $gin = new gerechtinfo($db->getConnection());
-// $ger = new gerecht($db->getConnection());
+//  $gin = new gerechtinfo($db->getConnection());
+$ger = new gerecht($db->getConnection());
 
 
 /// VERWERK 
@@ -24,11 +24,11 @@ require_once("lib/gerecht.php");
 // $data2 = $use->selecteerUser(1);
 // $data3 = $kit->selecteerKitchentype (1);
 // $data4 = $ing->selecteerIngredient (1);
- $data5 = $gin->selecteerGerechtinfo (4, 'W');
-// $data6 = $ger->selecteerGerecht(1);
+//  $data5 = $gin->selecteerGerechtinfo (4, 'W');
+$data6 = $ger->selecteerGerecht(4);
 
 /// RETURN
 //var_dump($data4);
 echo "<pre>";
-print_r($data5);
+print_r($data6);
 echo "</pre>";

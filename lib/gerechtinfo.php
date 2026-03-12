@@ -37,6 +37,7 @@ class gerechtinfo
                     "user_id" => $row["user_id"],
                     "record_type" => $row["record_type"],
                     "text_field" => $row["tekstveld"],
+                    "nummeriekveld"=> $row["nummeriekveld"],
                     "user_name" => $user["user_name"],
                     "email"=> $user["email"]
                 ];
@@ -45,13 +46,14 @@ class gerechtinfo
                     "id" => $row["id"],
                     "gerecht_id" => $row["gerecht_id"],
                     "record_type" => $row["record_type"],
-                    "text_field" => $row["tekstveld"]
+                    "text_field" => $row["tekstveld"],
+                    "nummeriekveld"=> $row["nummeriekveld"]
                 ];
             }
         }
         return ($gerechtinfo_and_user);
     }
+    
 }
 
 
-// Nog toevoegen User naam en extra info
