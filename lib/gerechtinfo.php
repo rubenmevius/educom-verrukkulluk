@@ -38,8 +38,8 @@ class gerechtinfo
                     "record_type" => $row["record_type"],
                     "text_field" => $row["tekstveld"],
                     "nummeriekveld"=> $row["nummeriekveld"],
-                    "user_name" => $user["user_name"],
-                    "email"=> $user["email"]
+                    "user_name" => $user["user_name"] ?? null,
+                    "email"=> $user["email"] ?? null,
                 ];
             } else {
                 $gerechtinfo_and_user[] = [

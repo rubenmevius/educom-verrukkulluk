@@ -43,13 +43,22 @@ class gerecht
 
         $remarks = $this->selectRemarks($gerecht_id);
 
+        $kitchens = $this->selectKitchen($gerecht_id);
+
+        $type = $this->selectType($gerecht_id);
+
+        $favorites = $this->selectFavorites($gerecht_id);
+
         //add ingredients and calories to recipe array
         $recipe["ingredients"] = $ingredients;
         $recipe["calories"] = $calories;
         $recipe["prijs"] = $price;
         $recipe["average"] = $average;
-        $recipe["Stapppen"] = $steps;
-        $remarks["Opmerkingen"] = $remarks;
+        $recipe["Stappen"] = $steps;
+        $recipe["Opmerkingen"] = $remarks;
+        $recipe["Keuken"] = $kitchens;
+        $recipe["Type"] = $type;
+        $recipe["Favorieten"] = $favorites;
 
 
         return $recipe;
@@ -117,7 +126,8 @@ class gerecht
         return $average;
     }
 
-    private function selectSteps($gerecht_id) {
+    private function selectSteps($gerecht_id)
+    {
         // create object to access steps
         $gerechtinfo = new gerechtinfo($this->connection);
 
@@ -131,17 +141,75 @@ class gerecht
         return $steps;
     }
 
-    private function selectRemarks ($gerecht_id) {
+    private function selectRemarks($gerecht_id)
+    {
 
-    $gerechtinfo = new gerechtinfo($this->connection);
+        $gerechtinfo = new gerechtinfo($this->connection);
 
-    $allremarks = $gerechtinfo->selecteerGerechtinfo($gerecht_id,"O");
-    $remarks = [];
+        $allremarks = $gerechtinfo->selecteerGerechtinfo($gerecht_id, "O");
+        $remarks = [];
 
-    foreach ($allremarks as $remarks) {
-        $remarks[] = $remarks["text_field"];
+        foreach ($allremarks as $remark) {
+            $remarks[] = $remark["text_field"];
+        }
+        return $remarks;
     }
-    return $remarks;
+
+    private function selectKitchen($keuken_id)
+    {
+        // get keuken_id from the gerecht table using the gerecht id
+        $sql = "SELECT keuken_id FROM gerecht WHERE id = $keuken_id";
+        $result = mysqli_query($this->connection, $sql);
+        $row = mysqli_fetch_assoc($result);
+
+        // fetch the kitchen description from kitchentype
+        $sql = "SELECT omschrijving FROM kitchentype
+        WHERE id = {$row["keuken_id"]}
+        AND record_type = 'K";
+        
+        $kitcheninfo = $this->kitchentype->selecteerKitchentype($row["keuken_id"],'K');
+
+        // return the omschrijving in an array
+        $kitchen = [];
+        $kitchen[] = $kitcheninfo["omschrijving"];
+
+        return $kitchen;
+    }
+
+    private function selectType($type_id)
+    {
+
+        // get keuken_id from the gerecht table using the gerecht id
+        $sql = "SELECT type_id FROM gerecht WHERE id = $type_id";
+        $result = mysqli_query($this->connection, $sql);
+        $row = mysqli_fetch_assoc($result);
+
+        // fetch the kitchen description from kitchentype
+        $sql = "SELECT omschrijving FROM kitchentype
+        WHERE id = {$row["type_id"]}
+        AND record_type = 'T";
+
+        $typeinfo = $this->kitchentype->selecteerKitchentype($row["type_id"], 'T');
+
+        // return the omschrijving in an array
+        $type = [];
+        $type[] = $typeinfo["omschrijving"];
+
+        return $type;
+    }
+
+    private function selectFavorites($gerecht_id)
+    {
+
+        $gerechtinfo = new gerechtinfo($this->connection);
+
+        $allfavorites = $gerechtinfo->selecteerGerechtinfo($gerecht_id, "F");
+        $favorites = [];
+
+        foreach ($allfavorites as $favorite) {
+            $favorites[] = $favorite["user_id"];
+        }
+
+        return $favorites;
+    }
 }
-}
-?>

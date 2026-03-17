@@ -7,8 +7,8 @@ class kitchentype {
             $this->connection = $connection;
         }
 
-        public function selecteerKitchentype ($kitchentype_id) {
-            $sql = "select * from kitchentype where id= $kitchentype_id";
+        public function selecteerKitchentype ($id, $record_type) {
+            $sql = "SELECT * FROM kitchentype WHERE id= $id";
 
             $result = mysqli_query ($this->connection, $sql);
             $kitchentype = mysqli_fetch_array($result, MYSQLI_ASSOC);
